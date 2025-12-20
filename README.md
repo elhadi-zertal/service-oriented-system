@@ -45,3 +45,31 @@ Client (curl / browser)
 
 ---
 
+
+## Prerequisites
+- Docker Desktop (or Docker Engine + Docker Compose)
+
+## Installation
+
+- Clone the repository with : git clone https://github.com/elhadi-zertal/service-oriented-system.git
+                              cd service-oriented-system
+
+- Start the services with : docker-compose up --build
+
+- The system will:
+
+Build the Python backend image
+
+Start PostgreSQL with initial data
+
+Start Flask backend
+
+Start Nginx reverse proxy
+
+## Testing the Service
+
+- Test Nginx is responding: curl http://localhost:8080/
+- Test backend health through Nginx: curl http://localhost:8080/health
+- Retrieve all logs: curl http://localhost:8080/api/logs
+- Add a new log entry: curl -X POST http://localhost:8080/api/log/test-service
+- View all log data: docker-compose exec postgres psql -U postgres -c "SELECT * FROM system_logs ORDER BY created_at DESC;"
